@@ -183,6 +183,9 @@ public class Constants {
 					"why",
 					"with",
 					"yet",
+					"'s",
+					".",
+					",",
 
 			};
 

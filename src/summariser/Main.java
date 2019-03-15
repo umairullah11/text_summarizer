@@ -32,9 +32,12 @@ public class Main {
 		
 		ArrayList<String> sentenceDetectionOutput = sd.Sentence();
 		
-		for(Sentence sent : sentences) {
+		sentences.parallelStream().forEach(sent -> {
 			sent.calculateScores();
-		}
+		});
+		/*for(Sentence sent : sentences) {
+			sent.calculateScores();
+		}*/
 		
 		
 		/*String sentenceDetection = sentenceDetectionOutput.toString();

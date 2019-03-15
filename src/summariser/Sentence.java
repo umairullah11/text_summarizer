@@ -38,6 +38,7 @@ class Sentence{
 			int wordsFrequencyScore = 0;
 			int cluewordsCount = 0;
 			int negativeWordsCount = 0;
+			this.noOfWords = this.words.size();
 			for(String word :this.words) {
 				//text frequency score 
 				wordsFrequencyScore += Main.wordFrequencyMap.get(word) == null? 0 : Main.wordFrequencyMap.get(word);
@@ -77,11 +78,11 @@ class Sentence{
 			}
 			
 			if(negativeWordsCount >= 2) {
-				this.clueWordsScrore = -2;
+				this.negativeKeywordsScore = -2;
 			} else if(negativeWordsCount == 1) {
-				this.clueWordsScrore = -1;
+				this.negativeKeywordsScore = -1;
 			} else if( negativeWordsCount <= 0) {
-				this.clueWordsScrore = 0;
+				this.negativeKeywordsScore = 0;
 			}
 			
 			System.out.println( this.toString());
@@ -94,6 +95,6 @@ class Sentence{
 		return "Sentence [sentenceStartPos=" + sentenceStartPos + ", sentenceEndPos=" + sentenceEndPos
 				+ ", textFrequencyScore=" + textFrequencyScore + ", sentencePostionScore=" + sentencePostionScore
 				+ ", clueWordsScrore=" + clueWordsScrore + ", negativeKeywordsScore=" + negativeKeywordsScore
-				+ ", stringLength=" + stringLength + ", noOfWords=" + noOfWords + "]";
+				+ ", noOfWords=" + noOfWords + "]";
 	}
 }
