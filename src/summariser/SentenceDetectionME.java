@@ -21,11 +21,11 @@ import opennlp.tools.util.Span;
 public class SentenceDetectionME { 
 	
 
-	public ArrayList<String> Sentence () {
+	public ArrayList<String> Sentence (String filePath) {
 
 		ArrayList<String> sent_output = new ArrayList<String>();
 		try {
-			String text = FileUtils.readFileToString(new File("data\\data corpus.txt"));
+			String text = FileUtils.readFileToString(new File(filePath));
 			 //txt extension necessary
 
 			/*String stopWordsPattern = String.join("|", Constants.stopWords);
@@ -76,7 +76,7 @@ public class SentenceDetectionME {
 					}
 				}
 				//System.out.println(text.substring(span.getStart(), span.getEnd())+" "+ span);
-				Main.sentences.add(new Sentence(Arrays.asList(tokens), spans[sentenceNo].getStart(), spans[sentenceNo].getEnd()));
+				Main.sentences.add(new Sentence(Arrays.asList(tokens), spans[sentenceNo].getStart(), spans[sentenceNo].getEnd(), sent.trim()));
 				sent_output.add(" \n" + sent);
 				sentenceNo++;
 			}       
