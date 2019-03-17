@@ -43,7 +43,7 @@ public class Main {
 		// Array lists and toString
 
 		sentences = sd.Sentence(text);
-		wordFrequencyMap = tkn.Words(text, false);
+		wordFrequencyMap = tkn.Words(text, true);
 
 		sentences.stream().forEach(sent -> {
 			sent.calculateScores();
