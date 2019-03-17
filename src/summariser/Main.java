@@ -21,16 +21,12 @@ public class Main {
 	public static Map<String, Integer> wordFrequencyMap = new HashMap<String, Integer>();
 	public static List<String> globalClueWords = Arrays.asList(Constants.key_wrd);
 	public static List<String> globalClueWordsNegative = Arrays.asList(Constants.key_wrd_neg);
-	public static int beginningIndex = 0;
-	public static int endingIndex = 0;
 
 	public static void main(String args[]) throws Exception {
 		// Creating objects
 
 		SentenceDetectionME sd = new SentenceDetectionME();
 		Tokenizer tkn = new Tokenizer();
-		SentencePosition sp = new SentencePosition();
-		WordFrequencyCorpus wrdfrq = new WordFrequencyCorpus();
 
 		// Getting file path from args
 		String filePath = "";
@@ -38,26 +34,26 @@ public class Main {
 			filePath = args[0];
 		}
 		if (StringUtil.isEmpty(filePath)) {
-			filePath = "data\\data corpus.txt";
+			filePath = "data\\Arsenal 4-1 Fulham Hosts start New Year with victory to close gap on top four(Tue 1st January).txt";
 		}
+		
+		//txt extension necessary
+		String text = FileUtils.readFileToString(new File(filePath));
 
 		// Array lists and toString
 
-		ArrayList<String> sentenceDetectionOutput = sd.Sentence(filePath);
-		Sentence lastSentence = sentences.get(sentences.size() - 1);
-		int sentenceEndPos = lastSentence.getSentenceEndPos();
-		beginningIndex = (int) (sentenceEndPos * 0.333);
-		endingIndex = (int) (sentenceEndPos * 0.666);
+		sentences = sd.Sentence(text);
+		wordFrequencyMap = tkn.Words(text, false);
 
 		sentences.stream().forEach(sent -> {
 			sent.calculateScores();
 		});
 
 		//Sorting the sentences on the basis of their score
-		sentences.sort(Comparator.comparing(Sentence::getScore));
+		sentences.sort(Comparator.comparing(Sentence::getScore).reversed());
 
-		// Filter top 20% sentences
-		int numOfElements = (int) (sentences.size() * 0.20);
+		// Filter top 40% sentences
+		int numOfElements = (int) (sentences.size() * 0.4);
 		List<Sentence> topScoredSenteces = sentences.stream().limit(numOfElements).collect(Collectors.toList());
 
 		// Ordering them according to their start position
